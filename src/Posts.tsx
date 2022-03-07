@@ -12,15 +12,29 @@ import {
   Row,
 } from "reactstrap";
 import Navigationbar from "./Navbar";
+import React, { useEffect, useState } from "react";
 
+import {posts } from "./Api" 
 const Posts = () => {
+
+    const [postList,setpostList]= useState<any[]>([]);
+    
+    useEffect(() =>{
+        posts().then((res) =>{
+            let resp = JSON.parse(JSON.stringify(res));
+            setpostList(resp);
+
+        })
+    })
   return (
     <>
       <Navigationbar />
       <br />
       <Container>
         <Row>
-          <Col sm={8}></Col>
+          <Col sm={8}>
+            
+          </Col>
           <Col sm={4}>
             <Card body>
               <CardTitle>Create Post</CardTitle>
