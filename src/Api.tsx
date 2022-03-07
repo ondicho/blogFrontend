@@ -28,3 +28,10 @@ export const updatePostDetail =(id:string,body:any)=>{
         body:body
     }).then((res) => res.json());
 }
+
+
+export const deletepost =(id:string) =>{
+    return fetch(base_url +id, {
+        method: "DELETE"
+    }).then((res) => res.json())
+};

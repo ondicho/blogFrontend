@@ -3,10 +3,8 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   CardText,
-  CardTitle,
   Col,
   Container,
   Form,
@@ -19,7 +17,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "reactstrap";
-import { postDetail, updatePostDetail } from "./Api";
+import { postDetail, updatePostDetail, deletepost } from "./Api";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
@@ -32,6 +30,18 @@ const PostDetail = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+
+  // modal
+  const [modal, setModal] = useState(false);
+  const toggle = () => {
+    setModal(!modal);
+  };
+
+  // modal
+  const [homemodal, sethomemodal] = useState(false);
+  const hometoggle = () => {
+    sethomemodal(!homemodal);
+  };
 
   // modal
   const [successModal, setsuccessModal] = useState(false);
@@ -55,12 +65,21 @@ const PostDetail = () => {
       data.append("category", category);
       data.append("description", description);
 
-      updatePostDetail(id,data).then((res) => {
+      updatePostDetail(id, data).then((res) => {
         let resp = JSON.parse(JSON.stringify(res));
-        
       });
       successToggle();
     }
+  };
+
+  const delete_post = (e: any) => {
+    e.preventDefault();
+
+    deletepost(id).then((res) => {
+      let resp = JSON.parse(JSON.stringify(res));
+    });
+    toggle();
+    hometoggle();
   };
   useEffect(() => {
     postDetail(id).then((res) => {
@@ -87,6 +106,39 @@ const PostDetail = () => {
                 </p>
               </CardBody>
             </Card>
+
+            <br />
+            <Button color="danger" style={{ float: "right" }} onClick={toggle}>
+              Delete Post
+            </Button>
+            <Modal isOpen={modal} toggle={toggle} centered={true}>
+              <ModalBody>
+                <strong>Are you sure ? </strong>
+                <br />
+                <small>
+                  Do you really want to delete this post?This process cannot be
+                  undone.
+                </small>
+              </ModalBody>
+              <ModalFooter>
+                <a href={"/" + id}>
+                  <Button onClick={toggle}>Cancel </Button>
+                </a>
+                <a href={"/"}>
+                  <Button color="danger" onClick={delete_post}>
+                    Delete
+                  </Button>
+                </a>
+              </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={homemodal} toggle={hometoggle} centered={true}>
+              <ModalBody>
+                <a href={"/"}>
+                  <Button color="success">Home</Button>
+                </a>
+              </ModalBody>
+            </Modal>
           </Col>
           <Col sm={1}></Col>
           <Col sm={5}>
@@ -130,7 +182,7 @@ const PostDetail = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormGroup>
-              <Button onClick={(e)=>update_post(e)}>Submit</Button>
+              <Button onClick={(e) => update_post(e)}>Submit</Button>
             </Form>
 
             <Modal isOpen={successModal} toggle={successToggle} centered={true}>
