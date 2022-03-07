@@ -54,52 +54,50 @@ const PostDetail = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col sm={6}>
-            <Card body>
-              <CardTitle>Update Post</CardTitle>
-              <CardText>
-                <Form>
-                  <FormGroup>
-                    <Label for="title">Title</Label>
-                    <br />
-                    <Input
-                      type="text"
-                      id="title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="category">Category</Label>
-                    <Input
-                      type="select"
-                      name="category"
-                      id="category"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    >
-                      <option>---</option>
-                      <option>Motivation</option>
-                      <option>Art</option>
-                      <option>Technology</option>
-                      <option>Finance</option>
-                    </Input>
-                  </FormGroup>
+          <Col sm={1}></Col>
+          <Col sm={5}>
+            <h3>Update Post</h3>
 
-                  <FormGroup>
-                    <Label for="description">Description</Label>
-                    <Input
-                      type="textarea"
-                      name="text"
-                      id="description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                  </FormGroup>
-                  <Button>Submit</Button>
-                </Form>
-              </CardText>
-            </Card>
+            <Form>
+              <FormGroup row>
+                <Label for="title">Title</Label>
+                <br />
+                <Input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="category">Category</Label>
+                <Input
+                  type="select"
+                  name="category"
+                  id="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option>---</option>
+                  <option>Motivation</option>
+                  <option>Art</option>
+                  <option>Technology</option>
+                  <option>Finance</option>
+                </Input>
+              </FormGroup>
+
+              <FormGroup row>
+                <Label for="description">Description</Label>
+                <Input
+                  type="textarea"
+                  name="text"
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </FormGroup>
+              <Button>Submit</Button>
+            </Form>
           </Col>
         </Row>
       </Container>
