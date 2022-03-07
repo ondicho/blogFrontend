@@ -1,8 +1,13 @@
+import Navigationbar from "./Navbar";
+
 const PostDetail = () =>{
 
-    return <>
-    <p>tests</p>
-    </>
-}
+    return (
+        <>
+          <Navigationbar />
+         
+        </>
+    );
+};
 
 export default PostDetail;

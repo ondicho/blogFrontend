@@ -4,7 +4,7 @@ const Posts = () => {
   return (
     <>
       <Navigationbar />
-      <p>tests</p>
+     
     </>
   );
 };
