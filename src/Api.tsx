@@ -21,3 +21,10 @@ export const postDetail =(id:string) =>{
         method: "GET"
     }).then((res) => res.json())
 };
+
+export const updatePostDetail =(id:string,body:any)=>{
+    return fetch(base_url + id, {
+        method:"PUT",
+        body:body
+    }).then((res) => res.json());
+}

@@ -2,9 +2,7 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
   CardText,
-  CardTitle,
   Col,
   Container,
   Form,
@@ -17,7 +15,7 @@ import {
   Row,
 } from "reactstrap";
 import Navigationbar from "./Navbar";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { posts, postForm } from "./Api";
 
@@ -69,6 +67,7 @@ const Posts = () => {
       <Container>
         <Row>
           <Col sm={6}>
+              <h3>Trending Posts</h3>
             {postList.map((key) => (
               <>
                 <a href={key.id}>

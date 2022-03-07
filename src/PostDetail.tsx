@@ -14,8 +14,12 @@ import {
   Input,
   Label,
   Row,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from "reactstrap";
-import { postDetail } from "./Api";
+import { postDetail, updatePostDetail } from "./Api";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
@@ -28,13 +32,43 @@ const PostDetail = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+
+  // modal
+  const [successModal, setsuccessModal] = useState(false);
+  const successToggle = () => {
+    setsuccessModal(!successModal);
+  };
+  //
+
+  //   add a post
+  const update_post = (e: any) => {
+    e.preventDefault();
+    if (title === "") {
+      alert("please indicate title");
+    } else if (category === "") {
+      alert("please indicate category");
+    } else if (description === "") {
+      alert("please indicate description");
+    } else {
+      var data = new FormData();
+      data.append("title", title);
+      data.append("category", category);
+      data.append("description", description);
+
+      updatePostDetail(id,data).then((res) => {
+        let resp = JSON.parse(JSON.stringify(res));
+        
+      });
+      successToggle();
+    }
+  };
   useEffect(() => {
     postDetail(id).then((res) => {
       let resp = JSON.parse(JSON.stringify(res));
       setpost(resp);
-      setTitle(resp);
-      setCategory(resp);
-      setDescription(resp);
+      setTitle(resp.title);
+      setCategory(resp.category);
+      setDescription(resp.description);
     });
   }, [id]);
   return (
@@ -96,8 +130,20 @@ const PostDetail = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormGroup>
-              <Button>Submit</Button>
+              <Button onClick={(e)=>update_post(e)}>Submit</Button>
             </Form>
+
+            <Modal isOpen={successModal} toggle={successToggle} centered={true}>
+              <ModalHeader>Success</ModalHeader>
+              <ModalBody>You have updated the post </ModalBody>
+              <ModalFooter>
+                <a href={"/" + id}>
+                  <Button color="warning" onClick={successToggle}>
+                    Ok{" "}
+                  </Button>
+                </a>
+              </ModalFooter>
+            </Modal>
           </Col>
         </Row>
       </Container>
