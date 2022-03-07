@@ -1,34 +1,36 @@
 import Navigationbar from "./Navbar";
 import {
-    Button,
-    Card,
-    CardFooter,
-    CardText,
-    CardTitle,
-    Col,
-    Container,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Row,
-  } from "reactstrap";
-import {postDetail} from "./Api"
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardText,
+  CardTitle,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
+import { postDetail } from "./Api";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
 const PostDetail = () => {
-    let route = useParams();
-    let id = Object.values(route).toString();
-   
-    const [post,setpost]= useState<any>({});
-    useEffect(() =>{
-        postDetail(id).then((res)=>{
-            let resp = JSON.parse(JSON.stringify(res));
-            setpost(resp);
-        });
-    }, [id]);
+  let route = useParams();
+  let id = Object.values(route).toString();
+
+  const [post, setpost] = useState<any>({});
+  useEffect(() => {
+    postDetail(id).then((res) => {
+      let resp = JSON.parse(JSON.stringify(res));
+      setpost(resp);
+    });
+  }, [id]);
   return (
     <>
       <Navigationbar />
@@ -36,11 +38,13 @@ const PostDetail = () => {
       <Container>
         <Row>
           <Col sm={8}>
-          <Card body>
-          <CardTitle>{post.title}</CardTitle>
-          <CardText>{post.description}</CardText>
-          <CardFooter>{post.category}</CardFooter>
-        </Card>
+            <Card>
+            <CardHeader>{post.title}</CardHeader>
+              <CardBody>
+                <CardText>{post.description}</CardText>
+                <p><small>{post.category}</small></p>
+              </CardBody>
+            </Card>
           </Col>
           <Col sm={4}>
             <Card body>

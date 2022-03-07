@@ -1,8 +1,6 @@
 export const base_url="https://moringablogbackend.herokuapp.com/posts/"
-// const cors=require("cors")
-// cors.use(cors({
-//     origin:'https://moringablogbackend.herokuapp.com/posts/1'
-// }))
+// export const base_url="http://127.0.0.1:8000/posts/"
+
 
 export const posts =() =>{
     return fetch(base_url, {

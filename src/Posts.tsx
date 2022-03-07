@@ -1,6 +1,8 @@
 import {
   Button,
   Card,
+  CardBody,
+  CardHeader,
   CardText,
   CardTitle,
   Col,
@@ -14,18 +16,16 @@ import {
 import Navigationbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 
-import {posts } from "./Api" 
+import { posts } from "./Api";
 const Posts = () => {
+  const [postList, setpostList] = useState<any[]>([]);
 
-    const [postList,setpostList]= useState<any[]>([]);
-    
-    useEffect(() =>{
-        posts().then((res) =>{
-            let resp = JSON.parse(JSON.stringify(res));
-            setpostList(resp);
-
-        })
-    })
+  useEffect(() => {
+    posts().then((res) => {
+      let resp = JSON.parse(JSON.stringify(res));
+      setpostList(resp);
+    });
+  });
   return (
     <>
       <Navigationbar />
@@ -33,7 +33,17 @@ const Posts = () => {
       <Container>
         <Row>
           <Col sm={8}>
-            
+            {postList.map((key,value)=>(
+              <><Card>
+                    <CardBody>
+                        <CardText>{key.title}</CardText>
+                        <p>
+                            <small>{key.category}</small>
+                        </p>
+                    </CardBody>
+                </Card><br /></>
+            )
+            )}
           </Col>
           <Col sm={4}>
             <Card body>
