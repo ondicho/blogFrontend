@@ -22,3 +22,19 @@ Navbar{
   width: 550;
    padding: 30
 }
+
+p.footer {
+  text-align: right;
+}
+
+p.postTitle.card-text {
+  text-align: left;
+}
+
+a.nav-link {
+  color: white!important;
+}
+
+.navbar-light .navbar-brand {
+  color: white!important;
+}

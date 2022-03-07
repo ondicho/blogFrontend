@@ -8,6 +8,13 @@ export const posts =() =>{
     }).then((res) => res.json())
 };
 
+export const postForm =(body:any) =>{
+    return fetch(base_url, {
+        method: "POST"
+    }).then((res) => res.json())
+};
+
+
 export const postDetail =(id:string) =>{
     return fetch(base_url +id, {
         method: "GET"

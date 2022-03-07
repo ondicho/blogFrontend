@@ -11,14 +11,14 @@ import {
 const Navigationbar = () =>{
     return (
         <div>
-          <Navbar color="light" light expand="md">
+          <Navbar color="dark" light expand="md">
             <NavbarBrand href="/">Daily Motivation Blog</NavbarBrand>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/components/">Home</NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="https://github.com/reactstrap/reactstrap">Add Post</NavLink>
+                  <NavLink href="/">Add Post</NavLink>
                 </NavItem>
               </Nav>
           </Navbar>

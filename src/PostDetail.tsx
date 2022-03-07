@@ -25,10 +25,16 @@ const PostDetail = () => {
   let id = Object.values(route).toString();
 
   const [post, setpost] = useState<any>({});
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
   useEffect(() => {
     postDetail(id).then((res) => {
       let resp = JSON.parse(JSON.stringify(res));
       setpost(resp);
+      setTitle(resp);
+      setCategory(resp);
+      setDescription(resp);
     });
   }, [id]);
   return (
@@ -37,27 +43,42 @@ const PostDetail = () => {
       <br />
       <Container>
         <Row>
-          <Col sm={8}>
+          <Col sm={6}>
             <Card>
-            <CardHeader>{post.title}</CardHeader>
+              <CardHeader className="postTitle">{post.title}</CardHeader>
               <CardBody>
-                <CardText>{post.description}</CardText>
-                <p><small>{post.category}</small></p>
+                <CardText className="postTitle">{post.description}</CardText>
+                <p className="footer">
+                  <small>{post.category}</small>
+                </p>
               </CardBody>
             </Card>
           </Col>
-          <Col sm={4}>
+          <Col sm={6}>
             <Card body>
-              <CardTitle>Create Post</CardTitle>
+              <CardTitle>Update Post</CardTitle>
               <CardText>
                 <Form>
                   <FormGroup>
-                    <Label for="exampleEmail">Title</Label>
-                    <Input />
+                    <Label for="title">Title</Label>
+                    <br />
+                    <Input
+                      type="text"
+                      id="title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="exampleSelect">Category</Label>
-                    <Input type="select" name="select" id="exampleSelect">
+                    <Label for="category">Category</Label>
+                    <Input
+                      type="select"
+                      name="category"
+                      id="category"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option>---</option>
                       <option>Motivation</option>
                       <option>Art</option>
                       <option>Technology</option>
@@ -66,8 +87,14 @@ const PostDetail = () => {
                   </FormGroup>
 
                   <FormGroup>
-                    <Label for="exampleText">Description</Label>
-                    <Input type="textarea" name="text" id="exampleText" />
+                    <Label for="description">Description</Label>
+                    <Input
+                      type="textarea"
+                      name="text"
+                      id="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
                   </FormGroup>
                   <Button>Submit</Button>
                 </Form>
